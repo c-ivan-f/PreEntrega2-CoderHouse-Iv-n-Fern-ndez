@@ -1,12 +1,14 @@
-//creo una funcion constructora que me permita crear productos.
+// Creo una función constructora que me permita crear productos.
 function Producto(nombre, precio, stock) {
     this.nombre = nombre;
     this.precio = precio;
     this.stock = stock;
 }
-//creo un array vacio para almacenar los productos.
+
+// Creo un array vacío para almacenar los productos.
 const productos = [];
-//instancio los productos y los agrego al array.
+
+// Instancio los productos y los agrego al array.
 let producto1 = new Producto('cafe', 1500, true);
 let producto2 = new Producto('te', 1000, false);
 let producto3 = new Producto('medialunas', 600, true);
@@ -17,23 +19,32 @@ productos.push(producto2);
 productos.push(producto3);
 productos.push(producto4);
 
-// creo una funcion que me permita calcular la suma de productos.
+// Creo un array para el carrito.
+const carrito = [];
 
-function sumarPreciosDeProductos(indice1, indice2) {
-    if (indice1 >= 0 && indice1 < productos.length && indice2 >= 0 && indice2 < productos.length) {
-        const precio1 = productos[indice1].precio;
-        const precio2 = productos[indice2].precio;
-        return ('La suma de los precios es:'+ precio1 + precio2);
-    } else {
-        return 'Índices inválidos';
-    }
+// Función para mostrar la lista de productos en un alert.
+function mostrarProductos() {
+    let mensaje = "Productos disponibles:\n\n";
+    productos.forEach(producto => {
+        mensaje += `Nombre: ${producto.nombre}, Precio: ${producto.precio}, Stock: ${producto.stock ? 'Disponible' : 'No disponible'}\n`;
+    });
+    alert(mensaje);
 }
 
-// creo una funcion para verificar la disponibilidad de un producto dado su índice
-function verificarDisponibilidad(indice) {
-    if (productos[indice].stock ==true) {
-        return 'el producto está disponible';
-    } else {
-        return 'el producto no está disponible';
+// Función para agregar productos al carrito.
+function agregarAlCarrito() {
+    const nombreProducto = prompt("Ingresa el nombre del producto que deseas agregar al carrito:");
+    for (let i = 0; i < productos.length; i++) {
+        if (productos[i].nombre.toLowerCase() === nombreProducto.toLowerCase()) {
+            carrito.push(productos[i]);
+            alert(`${productos[i].nombre} ha sido agregado al carrito.`);
+            return;
+        }
     }
+    alert("Producto no encontrado.");
 }
+
+
+// Mostrar productos y permitir al usuario agregar al carrito.
+mostrarProductos();
+agregarAlCarrito();
